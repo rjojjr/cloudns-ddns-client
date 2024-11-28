@@ -1,0 +1,11 @@
+[Unit]
+Description=ClouDNS DyDNS Update Client(by rjojjr)
+
+[Service]
+User=root
+RemainAfterExit=yes
+ExecStart=/bin/bash -c "cd /usr/local/cloudns-ddns-client && python3 /src/main.py"
+
+
+[Install]
+WantedBy=multi-user.target
