@@ -38,8 +38,7 @@ cloudns-client -a example.com https://ipv4.cloudns.net/api/dynamicURL/?q=XyZ...
 
 ### Updating Hostnames
 
-The automated updater client currently runs at fixed interval of
-15 minutes. To start the app in update mode, simply run the
+To start the app in update mode, simply run the
 program with no arguments:
 
 ```shell
@@ -50,4 +49,21 @@ OR(when installed as system service a Unix-based host)
 
 ```shell
 cloudns-client
+```
+
+### Setting Update Interval
+
+To change the update interval(defaults to 15 minutes), 
+run the client with the `-uim`(or `--update-interval-minutes`)
+flag followed by your desired update interval in minutes:
+
+```shell
+# Set interval to 10 minutes
+python3 src/main.py -uim 10
+```
+
+OR(when installed as system service a Unix-based host)
+
+```shell
+cloudns-client -uim 10
 ```
