@@ -3,6 +3,12 @@ import os
 import time
 
 
+def add_entry(domain: str, update_url: str) -> None:
+    state = get_state()
+    state.append({"domain": domain, "updateUrl": update_url, "addedAt": time.time()})
+    _write_state(state)
+
+
 def get_state() -> list:
     file_path = f"{_get_state_dir()}{os.sep}state.json"
     if not os.path.exists(file_path):
@@ -13,6 +19,15 @@ def get_state() -> list:
     return state
 
 
+def get_config() -> dict:
+    file_path = f"{_get_state_dir()}{os.sep}config.json"
+    if not os.path.exists(file_path):
+        return {"updateIntervalMinutes": 15}
+    config_file = open(file_path,"r")
+    config = json.loads(config_file.read())
+    config_file.close()
+    return config
+
 def _write_state(state: list) -> None:
     _create_state_directory()
     state_file = open(f"{_get_state_dir()}{os.sep}state.json","w+")
@@ -20,10 +35,11 @@ def _write_state(state: list) -> None:
     state_file.close()
 
 
-def add_entry(domain: str, update_url: str) -> None:
-    state = get_state()
-    state.append({"domain": domain, "updateUrl": update_url, "addedAt": time.time()})
-    _write_state(state)
+def _write_config(config: dict) -> None:
+    _create_state_directory()
+    config_file = open(f"{_get_state_dir()}{os.sep}config.json","w+")
+    config_file.write(json.dumps(config))
+    config_file.close()
 
 
 def _get_state_dir():

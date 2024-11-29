@@ -3,7 +3,7 @@ import state_manager
 import updater
 import time
 
-interval = 15 * 60 * 60
+interval = state_manager.get_config()['updateIntervalMinutes'] * 60 * 60
 
 def main():
     if len(sys.argv) == 4 and (sys.argv[1] == '-a' or sys.argv[1] == '--add-hostname'):
