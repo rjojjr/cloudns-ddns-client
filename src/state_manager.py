@@ -1,24 +1,6 @@
-import glob
 import json
 import os
 import time
-
-txtfiles = []
-for file in glob.glob("*.txt"):
-    txtfiles.append(file)
-
-
-def get_state() -> list:
-    state_file = open(f"{_get_state_dir()}{os.sep}state.json","r")
-    state = json.loads(state_file.read())
-    state_file.close()
-    return state
-
-
-def _write_state(state: list) -> list:
-    state_file = open(f"{_get_state_dir()}{os.sep}state.json","w")
-    state_file.write(json.dumps(state))
-    state_file.close()
 
 
 def add_entry(domain: str, update_url: str) -> None:
@@ -27,10 +9,46 @@ def add_entry(domain: str, update_url: str) -> None:
     _write_state(state)
 
 
+def get_state() -> list:
+    file_path = f"{_get_state_dir()}{os.sep}state.json"
+    if not os.path.exists(file_path):
+        return []
+    state_file = open(file_path,"r")
+    state = json.loads(state_file.read())
+    state_file.close()
+    return state
+
+
+def get_config() -> dict:
+    file_path = f"{_get_state_dir()}{os.sep}config.json"
+    if not os.path.exists(file_path):
+        return {"updateIntervalMinutes": 15}
+    config_file = open(file_path,"r")
+    config = json.loads(config_file.read())
+    config_file.close()
+    return config
+
+
+def update_config(config: dict) -> None:
+    _write_config(config)
+
+def _write_state(state: list) -> None:
+    _create_state_directory()
+    state_file = open(f"{_get_state_dir()}{os.sep}state.json","w+")
+    state_file.write(json.dumps(state))
+    state_file.close()
+
+
+def _write_config(config: dict) -> None:
+    _create_state_directory()
+    config_file = open(f"{_get_state_dir()}{os.sep}config.json","w+")
+    config_file.write(json.dumps(config))
+    config_file.close()
+
+
 def _get_state_dir():
-    dir_name = f'.cloudns-updater{os.sep}state'
-    user_home_dir = os.path.expanduser("~")
-    return os.path.join(user_home_dir, dir_name)
+    dir_name = f'.cloudns-updater{os.sep}state' if os.name == 'nt' else f'{os.sep}usr{os.sep}local{os.sep}cloudns-ddns-client{os.sep}state'
+    return os.path.join(os.path.expanduser("~"), dir_name) if os.name == 'nt' else dir_name
 
 def _create_state_directory():
     dir_path = _get_state_dir()
