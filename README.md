@@ -5,6 +5,17 @@ This is a simple python app to manage DyDNS updates for
 the user manually creating and entering ClouDNS update URLs,
 but I plan to integrate with the ClouDNS in the very near future.
 
+## Installation
+
+This client can currently be installed as systemd service
+on most unix distributions. 
+
+To install this client as a system service:
+
+```shell
+curl -fsSL https://raw.githubusercontent.com/rjojjr/cloudns-ddns-client/master/scripts/linux-installer.sh | sudo bash
+```
+
 ## USAGE
 
 ### Adding Hostnames
@@ -12,6 +23,9 @@ but I plan to integrate with the ClouDNS in the very near future.
 To add a ClouDNS hostname for updates, run this app 
 with the `-a`(or `--add-hostname`) flag followed by the hostname and then the
 DyDNS update URL provided by the ClouDNS webapp.
+
+**IMPORTANT** - Run the `--add-hostname` cmd with the `sudo` when 
+running this client as systemd service.
 
 EX:
 
