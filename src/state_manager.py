@@ -13,7 +13,8 @@ def get_state() -> list:
     return state
 
 
-def _write_state(state: list) -> list:
+def _write_state(state: list) -> None:
+    _create_state_directory()
     state_file = open(f"{_get_state_dir()}{os.sep}state.json","w+")
     state_file.write(json.dumps(state))
     state_file.close()
