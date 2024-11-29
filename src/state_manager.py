@@ -1,22 +1,20 @@
-import glob
 import json
 import os
 import time
 
-txtfiles = []
-for file in glob.glob("*.txt"):
-    txtfiles.append(file)
-
 
 def get_state() -> list:
-    state_file = open(f"{_get_state_dir()}{os.sep}state.json","r")
+    file_path = f"{_get_state_dir()}{os.sep}state.json"
+    if not os.path.exists(file_path):
+        return []
+    state_file = open(file_path,"r")
     state = json.loads(state_file.read())
     state_file.close()
     return state
 
 
 def _write_state(state: list) -> list:
-    state_file = open(f"{_get_state_dir()}{os.sep}state.json","w")
+    state_file = open(f"{_get_state_dir()}{os.sep}state.json","w+")
     state_file.write(json.dumps(state))
     state_file.close()
 
