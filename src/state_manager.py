@@ -28,9 +28,8 @@ def add_entry(domain: str, update_url: str) -> None:
 
 
 def _get_state_dir():
-    dir_name = f'.cloudns-updater{os.sep}state'
-    user_home_dir = os.path.expanduser("~")
-    return os.path.join(user_home_dir, dir_name)
+    dir_name = f'.cloudns-updater{os.sep}state' if os.name == 'nt' else f'{os.sep}usr{os.sep}local{os.sep}cloudns-ddns-client{os.sep}state'
+    return os.path.join(os.path.expanduser("~"), dir_name) if os.name == 'nt' else dir_name
 
 def _create_state_directory():
     dir_path = _get_state_dir()
