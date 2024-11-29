@@ -1,16 +1,16 @@
 # ClouDNS DDNS Update Client README
 
-This is a simple python app to manage DyDNS updates for hostnames powered
+This is a simple python app to manage DyDNS updates for hostnames powered by
 [ClouDNS](https://www.cloudns.net)'s DNS service. This app currently depends on
 the user manually creating and entering ClouDNS update URLs,
-but I plan to integrate with the ClouDNS in the very near future.
+but I plan to integrate this client with the ClouDNS in the very near future.
 
 ## Installation
 
 This client can currently be installed as systemd service
 on most Unix distributions. 
 
-To install this client as a system service:
+To install(or update) this client as a system service:
 
 ```shell
 curl -fsSL https://raw.githubusercontent.com/rjojjr/cloudns-ddns-client/master/scripts/linux-installer.sh | sudo bash
@@ -30,7 +30,7 @@ EX:
 python3 src/main.py -a example.com https://ipv4.cloudns.net/api/dynamicURL/?q=XyZ...
 ```
 
-OR(when installed as system service a Unix-based host)
+OR(when installed as system service on a Unix-based host)
 
 ```shell
 cloudns-client -a example.com https://ipv4.cloudns.net/api/dynamicURL/?q=XyZ...
@@ -45,7 +45,7 @@ program with no arguments:
 python3 src/main.py
 ```
 
-OR(when installed as system service a Unix-based host)
+OR(when installed as system service on a Unix-based host)
 
 ```shell
 cloudns-client
@@ -62,7 +62,7 @@ flag followed by your desired update interval in minutes:
 python3 src/main.py -uim 10
 ```
 
-OR(when installed as system service a Unix-based host)
+OR(when installed as system service on a Unix-based host)
 
 ```shell
 cloudns-client -uim 10
