@@ -28,6 +28,10 @@ def get_config() -> dict:
     config_file.close()
     return config
 
+
+def update_config(config: dict) -> None:
+    _write_config(config)
+
 def _write_state(state: list) -> None:
     _create_state_directory()
     state_file = open(f"{_get_state_dir()}{os.sep}state.json","w+")

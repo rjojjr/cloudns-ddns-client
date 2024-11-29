@@ -12,12 +12,21 @@ def main():
         print(f'Added domain {sys.argv[2]} with update URL {sys.argv[3]}')
         return
 
+    if len(sys.argv) == 3 and (sys.argv[1] == '-uim' or sys.argv[1] == '--update-interval-minutes'):
+        print(f'Setting update interval minutes to {sys.argv[2]}')
+        config = state_manager.get_config()
+        config['updateIntervalMinutes'] = int(sys.argv[2])
+        state_manager.update_config(config)
+        print(f'Set update interval minutes to {sys.argv[2]}')
+        return
+
     print('Starting DyDNS update thread')
     while True:
         print('Updating ClouDNS domains')
         state = state_manager.get_state()
         updater.update(state)
         print('Updated ClouDNS domains')
+        interval = state_manager.get_config()['updateIntervalMinutes'] * 60
         time.sleep(interval)
 
 
