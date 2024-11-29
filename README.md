@@ -1,7 +1,7 @@
-# ClouDNS DDNS Client README
+# ClouDNS DDNS Update Client README
 
-This is a simple python app to manage DyDNS updates for 
-[ClouDNS](https://www.cloudns.net). This app currently depends on
+This is a simple python app to manage DyDNS updates for hostnames powered
+[ClouDNS](https://www.cloudns.net)'s DNS service. This app currently depends on
 the user manually creating and entering ClouDNS update URLs,
 but I plan to integrate with the ClouDNS in the very near future.
 
@@ -31,6 +31,12 @@ EX:
 
 ```shell
 python3 src/main.py -a example.com https://ipv4.cloudns.net/api/dynamicURL/?q=XyZ...
+```
+
+OR(when installed as system service a unix-based host)
+
+```shell
+cloudns-client -a example.com https://ipv4.cloudns.net/api/dynamicURL/?q=XyZ...
 ```
 
 ### Updating Hostnames
