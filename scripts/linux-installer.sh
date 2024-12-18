@@ -23,7 +23,7 @@ cd /usr/local || (mkdir -p /usr/local && (cd /usr/local || (echo 'failed to crea
 if [ -d ./cloudns-ddns-client  ]; then
   echo "Removing old update client install"
   {
-    rm -rf ./torch-tuner
+    rm -rf ./cloudns-ddns-client
   } || {
     echo 'Failed to remove old update client install' && \
     exit 1
