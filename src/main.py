@@ -2,6 +2,7 @@ import sys
 import state_manager
 import updater
 import time
+import system_service
 
 version = '1.0.2'
 
@@ -9,6 +10,16 @@ continue_update = True
 
 
 def _update():
+    status_tuple = system_service.get_service_status()
+    if status_tuple[1]:
+        if not status_tuple[0]:
+            print('Starting DyDNS update system service')
+            system_service.start_service()
+        else:
+            print('Restarting DyDNS update system service')
+            system_service.restart_service()
+        return
+
     print('Starting DyDNS update thread')
     # TODO - do this in an actual thread
     while continue_update:
