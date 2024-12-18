@@ -9,7 +9,7 @@ version = '1.0.2'
 continue_update = True
 
 
-def _update_svc(is_sys_svc: bool = False):
+def _start_update(is_sys_svc: bool = False):
     if system_service.is_linux() and not is_sys_svc:
         status_tuple = system_service.get_service_status()
         if not status_tuple[3]:
@@ -53,7 +53,7 @@ def _application():
         return
 
     if len(sys.argv) > 1 and (sys.argv[1] == '-ss' or sys.argv[1] == '--system-service'):
-        _update_svc(True)
+        _start_update(True)
         return
 
     if len(sys.argv) == 4 and (sys.argv[1] == '-a' or sys.argv[1] == '--add-hostname'):
@@ -77,7 +77,7 @@ def _application():
             printf(f'Hostname: {host["domain"]}, Added At: {host["addedAt"]}')
         return
 
-    _update_svc()
+    _start_update()
 
 
 def main():
