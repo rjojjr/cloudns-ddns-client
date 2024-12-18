@@ -5,6 +5,25 @@ import time
 
 version = '1.0.2'
 
+continue_update = True
+
+
+def _update():
+    print('Starting DyDNS update thread')
+    # TODO - do this in an actual thread
+    while continue_update:
+        print('Updating ClouDNS domains')
+        state = state_manager.get_state()
+        errors = updater.update(state)
+        print('Updated ClouDNS domains')
+        if len(errors) > 0:
+            print(f'Encountered {str(len(errors)}} errors')
+            for error in errors:
+                print(f'ERROR: {str(error)}')
+        interval = state_manager.get_config()['updateIntervalMinutes'] * 60
+        time.sleep(interval)
+    print('DyDNS update thread ended')
+
 
 def _application():
     if len(sys.argv) == 4 and (sys.argv[1] == '-a' or sys.argv[1] == '--add-hostname'):
@@ -28,18 +47,7 @@ def _application():
             printf(f'Hostname: {host["domain"]}, Added At: {host["addedAt"]}')
         return
 
-    print('Starting DyDNS update thread')
-    while True:
-        print('Updating ClouDNS domains')
-        state = state_manager.get_state()
-        errors = updater.update(state)
-        print('Updated ClouDNS domains')
-        if len(errors) > 0:
-            print(f'Encountered {str(len(errors)}} errors')
-            for error in errors:
-                print(f'ERROR: {str(error)}')
-        interval = state_manager.get_config()['updateIntervalMinutes'] * 60
-        time.sleep(interval)
+    _update()
 
 
 def main():
