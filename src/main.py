@@ -3,7 +3,7 @@ import state_manager
 import updater
 import time
 
-version = '1.0.1'
+version = '1.0.2'
 
 
 def _application():
