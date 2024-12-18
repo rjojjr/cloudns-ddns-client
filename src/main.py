@@ -26,6 +26,15 @@ def _update():
 
 
 def _application():
+    if len(sys.argv) > 1 and (sys.argv[1] == '-h' or sys.argv[1] == '--help'):
+        print(f'Available Commands:')
+        print('----------------------------')
+        print('-h (| --help) : Shows this screen')
+        print('-a (| --add-hostname) <HOSTNAME/DOMAIN> <CLOUDNS_DYNAMIC_UPDATE_URL> : Add host to update list')
+        print('-uim (| --update-interval-minutes) <MINUTES_BETWEEN_UPDATES> : Sets update interval minutes')
+        print('(no arguments) : Start the DyDNS update thread')
+        return
+
     if len(sys.argv) == 4 and (sys.argv[1] == '-a' or sys.argv[1] == '--add-hostname'):
         print(f'Adding domain {sys.argv[2]} with update URL {sys.argv[3]}')
         state_manager.add_entry(sys.argv[2], sys.argv[3])
