@@ -2,6 +2,9 @@
 
 ## Releases
 
+- 1.0.2
+  - Add argument to list currently updating hostnames
+  - Released 12/18/2024
 - 1.0.1
   - Add fix state file not created
   - Add client is user agnostic in unix
