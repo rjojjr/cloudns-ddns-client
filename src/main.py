@@ -32,8 +32,12 @@ def _application():
     while True:
         print('Updating ClouDNS domains')
         state = state_manager.get_state()
-        updater.update(state)
+        errors = updater.update(state)
         print('Updated ClouDNS domains')
+        if len(errors) > 0:
+            print(f'Encountered {str(len(errors)}} errors')
+            for error in errors:
+                print(f'ERROR: {str(error)}')
         interval = state_manager.get_config()['updateIntervalMinutes'] * 60
         time.sleep(interval)
 
