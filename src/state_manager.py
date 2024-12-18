@@ -5,7 +5,7 @@ import time
 
 def add_entry(domain: str, update_url: str) -> None:
     state = get_state()
-    state.append({"domain": domain, "updateUrl": update_url, "addedAt": time.time()})
+    state.append({"domain": domain, "updateUrl": update_url, "addedAt": time.time(), "active": True})
     _write_state(state)
 
 
