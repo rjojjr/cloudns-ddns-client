@@ -16,7 +16,7 @@ def restart_service():
 def get_service_status():
     process = subprocess.Popen("sudo systemctl status cloudns-ddns-update-client.service", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     for line in process.stdout.readlines():
-        if 'could not be found' in line:
+        if 'Unit cloudns-ddns-update-client.service could not be found' in line:
             return (False, False, 'DyDNS service not installed')
         if 'inactive' in line.lower():
             return (False, True, 'DyDNS service is not active')
