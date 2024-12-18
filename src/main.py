@@ -15,9 +15,11 @@ def _update():
         if not status_tuple[0]:
             print('Starting DyDNS update system service')
             system_service.start_service()
+            print(f'{system_service.get_service_status()[2]}')
         else:
             print('Restarting DyDNS update system service')
             system_service.restart_service()
+            print(f'{system_service.get_service_status()[2]}')
         return
 
     print('Starting DyDNS update thread')
