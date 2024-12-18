@@ -4,7 +4,7 @@ import updater
 import time
 import system_service
 
-version = '1.0.2'
+version = '1.1.0'
 
 continue_update = True
 
