@@ -9,7 +9,7 @@ version = '1.0.2'
 continue_update = True
 
 
-def _update():
+def _update_svc():
     status_tuple = system_service.get_service_status()
     if status_tuple[1]:
         if not status_tuple[0]:
@@ -45,7 +45,7 @@ def _application():
         print('-h (| --help) : Shows this screen')
         print('-a (| --add-hostname) <HOSTNAME/DOMAIN> <CLOUDNS_DYNAMIC_UPDATE_URL> : Add host to update list')
         print('-uim (| --update-interval-minutes) <MINUTES_BETWEEN_UPDATES> : Sets update interval minutes')
-        print('(no arguments) : Start the DyDNS update thread')
+        print('(no arguments) : Start the DyDNS update service')
         return
 
     if len(sys.argv) == 4 and (sys.argv[1] == '-a' or sys.argv[1] == '--add-hostname'):
@@ -69,7 +69,7 @@ def _application():
             printf(f'Hostname: {host["domain"]}, Added At: {host["addedAt"]}')
         return
 
-    _update()
+    _update_svc()
 
 
 def main():
