@@ -11,16 +11,19 @@ continue_update = True
 
 def _update_svc():
     status_tuple = system_service.get_service_status()
-    if status_tuple[1]:
-        if not status_tuple[0]:
-            print('Starting DyDNS update system service')
-            system_service.start_service()
-            print(f'{system_service.get_service_status()[2]}')
-        else:
-            print('Restarting DyDNS update system service')
-            system_service.restart_service()
-            print(f'{system_service.get_service_status()[2]}')
-        return
+    if not status_tuple[3]:
+        print('WARNING - You must run this program with root permissions to manage the DyDNS system service if it is installed!')
+    else:
+        if status_tuple[1]:
+            if not status_tuple[0]:
+                print('Starting DyDNS update system service')
+                system_service.start_service()
+                print(f'{system_service.get_service_status()[2]}')
+            else:
+                print('Restarting DyDNS update system service')
+                system_service.restart_service()
+                print(f'{system_service.get_service_status()[2]}')
+            return
 
     print('Starting DyDNS update thread')
     # TODO - do this in an actual thread
