@@ -10,7 +10,7 @@ continue_update = True
 
 
 def _update_svc(is_sys_svc: bool = False):
-    if not is_sys_svc:
+    if system_service.is_linux() and not is_sys_svc:
         status_tuple = system_service.get_service_status()
         if not status_tuple[3]:
             print('WARNING - You must run this program with root permissions to manage the DyDNS system service if it is installed!')

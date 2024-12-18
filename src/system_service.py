@@ -1,6 +1,7 @@
 import subprocess
 import errno
 import os
+from sys import platform
 
 
 def stop_service():
@@ -22,6 +23,10 @@ def _is_root():
         if e[0] == errno.EPERM:
             return False
     return True
+
+
+def is_linux():
+    return platform == "linux" or platform == "linux2"
 
 
 def get_service_status():
