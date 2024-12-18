@@ -27,7 +27,7 @@ def _start_update(is_sys_svc: bool = False):
                 return
 
     print('Starting DyDNS update thread')
-    # TODO - do this in an actual thread
+    # TODO - do this in an actual thread?
     while continue_update:
         print('Updating ClouDNS domains')
         state = state_manager.get_state()
